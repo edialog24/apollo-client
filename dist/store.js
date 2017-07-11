@@ -7,7 +7,7 @@ exports.getDataWithOptimisticResults = undefined;
 exports.createApolloReducer = createApolloReducer;
 exports.createApolloStore = createApolloStore;
 
-var _redux = require('redux');
+
 
 var _store = require('./data/store');
 
@@ -96,7 +96,7 @@ function createApolloStore(_a) {
         middlewares.push(logger);
     }
     if (middlewares.length > 0) {
-        enhancers.push(_redux.applyMiddleware.apply(void 0, middlewares));
+       // enhancers.push(_redux.applyMiddleware.apply(void 0, middlewares));
     }
     if (typeof window !== 'undefined') {
         var anyWindow = window;
@@ -104,14 +104,14 @@ function createApolloStore(_a) {
             enhancers.push(anyWindow.devToolsExtension());
         }
     }
-    var compose = _redux.compose;
+    //var compose = _redux.compose;
     if (initialState && initialState[reduxRootKey] && initialState[reduxRootKey]['queries']) {
         throw new Error('Apollo initial state may not contain queries, only data');
     }
     if (initialState && initialState[reduxRootKey] && initialState[reduxRootKey]['mutations']) {
         throw new Error('Apollo initial state may not contain mutations, only data');
     }
-    return (0, _redux.createStore)((0, _redux.combineReducers)((_f = {}, _f[reduxRootKey] = createApolloReducer(config), _f)), initialState, compose.apply(void 0, enhancers));
+    return (((_f = {}, _f[reduxRootKey] = createApolloReducer(config), _f)), initialState, compose.apply(void 0, enhancers));
     var _f;
 }
 //# sourceMappingURL=store.js.map
